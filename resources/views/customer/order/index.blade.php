@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h3>Meus Pedidos</h3>
+        <h3>Meus Pedidos 2</h3>
 
         <a href="{{route('customer.order.selectCategory')}}" class="btn btn-default">Novo Pedido</a>
         <br><br>
