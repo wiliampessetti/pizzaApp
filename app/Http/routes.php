@@ -53,7 +53,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'adm
 
 Route::group(['prefix'=>'customer', 'middleware'=>'auth.checkrole:client', 'as'=>'customer.'], function(){
     Route::get('order', ['as'=>'order.index', 'uses'=>'CheckoutController@index']);
-    Route::get('order/create', ['as'=>'order.create', 'uses'=>'CheckoutController@create']);
+    Route::get('order/create/{id}', ['as'=>'order.create', 'uses'=>'CheckoutController@create']);
     Route::get('order/selectCategory', ['as'=>'order.selectCategory','uses'=>'CheckoutController@selectCategory']);
     Route::get('order/selectProduct/{id}', ['as'=>'order.selectProduct','uses'=>'CheckoutController@selectProduct']);
     Route::post('order/store', ['as'=>'order.store', 'uses'=>'CheckoutController@store']);

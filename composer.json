@@ -10,7 +10,8 @@
         "laravel/framework": "5.2.*",
         "prettus/l5-repository": "^2.6",
         "bestmomo/scafold": "^1.0",
-        "laravelcollective/html": "^5.2"
+        "laravelcollective/html": "^5.2",
+        "gloudemans/shoppingcart": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

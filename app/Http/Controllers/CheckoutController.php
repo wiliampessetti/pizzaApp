@@ -8,6 +8,7 @@ use CodeDelivery\Repositories\OrderRepository;
 use CodeDelivery\Repositories\ProductRepository;
 use CodeDelivery\Repositories\UserRepository;
 use CodeDelivery\Services\OrderService;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,10 +57,14 @@ class CheckoutController extends Controller
         return view('customer.order.index', compact('orders'));
     }
 
-    public function create()
+    public function create($id)
     {
-        $products = $this->productRepository->pluck();
-        return view('customer.order.create', compact('products'));
+        $product = $this->productRepository->scopeQuery(function ($query) use($id){
+            return $query->where('id', '=', $id);
+        })->paginate();
+        //Cart::add($product['id'], $product['name'], 1, $product['price']);
+        //return view('customer.order.create');
+        return dd($product);
     }
 
     public function selectProduct($id)
