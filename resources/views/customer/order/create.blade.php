@@ -22,13 +22,13 @@
                         <td>{{$row->name}}</td>
                         <td>{{$row->qty}}</td>
                         <td>{{$row->price}}</td>
-                        <td>{{$row->total}}</td>
+                        <td>{{$row->subtotal}}</td>
                         <td></td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
-
+            <h3 align="right">Total do Pedido: R$ {{Cart::subtotal()}}</h3>
             {!! Form::submit('Finalizar Pedido', ['class'=>'btn btn-primary']) !!}
         </div>
     </div>

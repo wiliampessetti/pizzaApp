@@ -61,10 +61,9 @@ class CheckoutController extends Controller
     {
         $product = $this->productRepository->scopeQuery(function ($query) use($id){
             return $query->where('id', '=', $id);
-        })->paginate();
-        //Cart::add($product['id'], $product['name'], 1, $product['price']);
-        //return view('customer.order.create');
-        return dd($product);
+        })->paginate()->toArray();
+        Cart::add($product['data'][0]['id'], $product['data'][0]['name'], 1, $product['data'][0]['price']);
+        return view('customer.order.create');
     }
 
     public function selectProduct($id)
