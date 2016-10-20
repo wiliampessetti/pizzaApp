@@ -85,7 +85,8 @@ class CheckoutController extends Controller
         $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
         $data['client_id'] = $clientId;
         $this->service->create($data);
-
+        Cart::destroy();
+        //return dd($data);
         return redirect()->route('customer.order.index');
     }
 
