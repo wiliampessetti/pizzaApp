@@ -79,9 +79,16 @@ class CheckoutController extends Controller
         return view('customer.order.selectCategory', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $data = $request->all();
+        $i = 0;
+        foreach (Cart::content() as $row){
+
+            $data['items'][$i]['product_id'] = $row->id;
+            $data['items'][$i]['qtd'] = $row->qty;
+            $data['items'][$i]['price'] = $row->price;
+            $i++;
+        }
         $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
         $data['client_id'] = $clientId;
         $this->service->create($data);
