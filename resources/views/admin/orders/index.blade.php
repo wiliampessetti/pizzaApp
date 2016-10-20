@@ -36,7 +36,17 @@
                             Entregador Indefinido.
                         @endif
                     </td>
-                    <td>{{$order->status}}</td>
+                    <td>
+                        @if($order->status === 0)
+                            Pendente
+                        @elseif($order->status === 1)
+                            A caminho
+                        @elseif($order->status === 2)
+                            Entregue
+                        @elseif($order->status === 3)
+                            Cancelado
+                        @endif
+                    </td>
                     <td>
                         <a href="{{route('admin.orders.edit', ['id'=>$order->id])}}" class="btn btn-default btn-sm">
                             Editar

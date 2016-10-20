@@ -93,7 +93,6 @@ class CheckoutController extends Controller
         $data['client_id'] = $clientId;
         $this->service->create($data);
         Cart::destroy();
-        //return dd($data);
         return redirect()->route('customer.order.index');
     }
 

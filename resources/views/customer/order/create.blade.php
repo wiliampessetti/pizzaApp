@@ -20,7 +20,7 @@
                 @foreach(Cart::content() as $row)
                     <tr>
                         <td>{{$row->name}}</td>
-                        <td>{{$row->qty}}</td>
+                        <td>{!! Form::number('qtd', $row->qty, ['class'=>'form-control']) !!}</td>
                         <td>{{$row->price}}</td>
                         <td>{{$row->subtotal}}</td>
                         <td></td>
@@ -29,7 +29,7 @@
                 </tbody>
             </table>
             <h3 align="right">Total do Pedido: R$ {{Cart::subtotal()}}</h3>
-            <a href="{{route('customer.order.store')}}" class="btn btn-primary">Finalizar Pedido</a>
+            <a href="{{route('customer.order.store')}}" class="btn btn-primary" onclick="return confirm('Após finalizado o pedido não pode ser alterado ou editado!')">Finalizar Pedido</a>
         </div>
     </div>
 @endsection
