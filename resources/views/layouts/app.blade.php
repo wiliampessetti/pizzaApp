@@ -48,7 +48,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <!--<li><a href="{{ url('/home') }}">Home</a></li>-->
                     @if(Auth::user())
                         @if(Auth::user()->role == "admin")
                             <li><a href="{{ route('admin.categories.index') }}">Categorias</a></li>
