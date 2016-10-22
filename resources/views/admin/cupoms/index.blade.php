@@ -23,10 +23,10 @@
 				<td>{{$cupom->code}}</td>
 				<td>{{$cupom->value}}</td>
 				<td>
-					<a href="{{route('admin.cupoms.edit', ['id'=>$cupom->id])}}" class="btn btn-default btn-sm">
+					<a href="{{route('admin.cupoms.edit', ['id'=>$cupom->id])}}" class="btn btn-warning btn-sm">
 						Editar
 					</a>
-					<a href="{{route('admin.cupoms.destroy', ['id'=>$cupom->id])}}" class="btn btn-default btn-sm">
+					<a href="{{route('admin.cupoms.destroy', ['id'=>$cupom->id])}}" class="btn btn-danger btn-sm" onclick="return confirm('Deseja excluir o cupom selecionado?')">
 						Excluir
 					</a>
 				</td>

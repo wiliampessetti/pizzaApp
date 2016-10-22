@@ -25,6 +25,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'adm
     Route::get('categories/edit/{id}', ['as'=>'categories.edit','uses'=>'CategoriesController@edit']);
     Route::post('categories/update/{id}', ['as'=>'categories.update','uses'=>'CategoriesController@update']);
     Route::post('categories/store', ['as'=>'categories.store','uses'=>'CategoriesController@store']);
+    Route::get('categories/destroy/{id}', ['as'=>'categories.destroy','uses'=>'CategoriesController@destroy']);
 
     Route::get('clients', ['as'=>'clients.index','uses'=>'ClientsController@index']);
     Route::get('clients/create', ['as'=>'clients.create','uses'=>'ClientsController@create']);

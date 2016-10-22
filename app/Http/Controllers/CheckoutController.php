@@ -75,7 +75,7 @@ class CheckoutController extends Controller
     }
 
     public function selectCategory(){
-        $categories = $this->categoryRepository->pluck();
+        $categories = $this->categoryRepository->pluckCheckout();
         return view('customer.order.selectCategory', compact('categories'));
     }
 

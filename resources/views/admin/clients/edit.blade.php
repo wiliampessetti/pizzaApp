@@ -9,7 +9,7 @@
 	@include('admin.clients._form')
 
 	<div class="form-group">
-	{!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
+	{!! Form::submit('Salvar', ['class'=>'btn btn-success']) !!}
 	</div>
 
 	{!! Form::close() !!}

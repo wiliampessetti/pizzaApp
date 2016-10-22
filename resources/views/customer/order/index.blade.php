@@ -4,7 +4,7 @@
     <div class="container">
         <h3>Meus Pedidos</h3>
 
-        <a href="{{route('customer.order.selectCategory')}}" class="btn btn-default">Novo Pedido</a>
+        <a href="{{route('customer.order.selectCategory')}}" class="btn btn-primary">Novo Pedido</a>
         <br><br>
 
         <table class="table table-bordered">

@@ -48,7 +48,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('admin.orders.edit', ['id'=>$order->id])}}" class="btn btn-default btn-sm">
+                        <a href="{{route('admin.orders.edit', ['id'=>$order->id])}}" class="btn btn-warning btn-sm">
                             Editar
                         </a>
                     </td>

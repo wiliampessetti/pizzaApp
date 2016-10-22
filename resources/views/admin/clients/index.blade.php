@@ -4,7 +4,7 @@
 <div class="container">
 	<h3>Clientes</h3>
 	<br>
-	<a href="{{route('admin.clients.create')}}" class="btn btn-default">Novo Cliente</a>
+	<a href="{{route('admin.clients.create')}}" class="btn btn-primary">Novo Cliente</a>
 	<br><br>
 
 	<table class="table table-bordered">
@@ -21,7 +21,7 @@
 				<td>{{$client->id}}</td>
 				<td>{{$client->user->name}}</td>
 				<td>
-					<a href="{{route('admin.clients.edit', ['id'=>$client->id])}}" class="btn btn-default btn-sm">
+					<a href="{{route('admin.clients.edit', ['id'=>$client->id])}}" class="btn btn-warning btn-sm">
 						Editar
 					</a>
 				</td>

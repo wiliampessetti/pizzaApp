@@ -15,9 +15,14 @@ use CodeDelivery\Validators\CategoryValidator;
 class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
 {
 
-    public function pluck()
+    public function pluckCheckout()
     {
         return $this->model->get(['id', 'name']);
+    }
+
+    public function pluck()
+    {
+        return $this->model->pluck('name', 'id');
     }
     /**
      * Specify Model class name
