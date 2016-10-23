@@ -7,6 +7,7 @@ use CodeDelivery\Http\Requests\AdminCategoryRequest;
 use CodeDelivery\Http\Requests\AdminProductRequest;
 use CodeDelivery\Repositories\CategoryRepository;
 use CodeDelivery\Repositories\ProductRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -19,18 +20,21 @@ class ProductsController extends Controller
         $this->categoryRepository = $categoryRepository;
     }
 
-    public function index(){
-    	$products = $this->repository->paginate(10);
+    public function index()
+    {
+        $products = $this->repository->paginate(10);
 
-    	return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products'));
     }
 
-    public function create(){
+    public function create()
+    {
         $categories = $this->categoryRepository->pluck();
-    	return view('admin.products.create', compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
 
-    public function store(AdminProductRequest $requests){
+    public function store(AdminProductRequest $requests)
+    {
         $data = $requests->all();
         $this->repository->create($data);
 
@@ -56,8 +60,13 @@ class ProductsController extends Controller
 
     public function destroy($id)
     {
-        $this->repository->delete($id);
+        try {
+            $this->repository->delete($id);
 
-        return redirect()->route('admin.products.index');
+            return redirect()->route('admin.products.index');
+
+        } catch (Exception $e) {
+            return back()->with('erro', 'Erro: Existem lançamentos vinculados a esse produto!');
+        }
     }
 }

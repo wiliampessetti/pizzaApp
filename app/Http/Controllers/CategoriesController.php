@@ -5,7 +5,9 @@ namespace CodeDelivery\Http\Controllers;
 use CodeDelivery\Http\Requests;
 use CodeDelivery\Http\Requests\AdminCategoryRequest;
 use CodeDelivery\Repositories\CategoryRepository;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class CategoriesController extends Controller
 {
@@ -28,9 +30,24 @@ class CategoriesController extends Controller
 
     public function store(AdminCategoryRequest $requests){
         $data = $requests->all();
-        $this->repository->create($data);
+        if (Input::hasFile('image')){
+            $image = Input::file('image');
+            $extension = $image->getClientOriginalExtension();
+            if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png'){
+                return back()->with('erro', 'Erro: O formato da imagem deve ser JPG, JPEG ou PNG!');
+            }else{
 
-        return redirect()->route('admin.categories.index');
+                $image->move(public_path().'/img/categories/', 'img_'.$data['name'].'.'.$extension);
+                $data['image'] = 'img_'.$data['name'].'.'.$extension;
+                $this->repository->create($data);
+                return redirect()->route('admin.categories.index');
+            }
+        }else{
+            $this->repository->create($data);
+            return redirect()->route('admin.categories.index');
+        }
+
+
     }
 
     public function edit($id)
@@ -51,8 +68,12 @@ class CategoriesController extends Controller
 
     public function destroy($id)
     {
-        $this->repository->delete($id);
+        try{
+            $this->repository->delete($id);
 
-        return redirect()->route('admin.categories.index');
+            return redirect()->route('admin.categories.index');
+        }catch (Exception $e){
+            return back()->with('erro', 'Erro: Impossível excluir categorias com produtos vinculados!');
+        }
     }
 }

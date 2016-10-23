@@ -17,6 +17,7 @@
                             <p>
                                 <h3>{{$category->name}}</h3>
                             </p>
+                            <img src="{{ URL::to( '/img/categories/'.$category->image) }}" />
                         </div>
                     </div>
                 </div>

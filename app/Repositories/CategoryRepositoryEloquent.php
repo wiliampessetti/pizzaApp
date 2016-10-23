@@ -17,7 +17,7 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
 
     public function pluckCheckout()
     {
-        return $this->model->get(['id', 'name']);
+        return $this->model->get(['id', 'name', 'image']);
     }
 
     public function pluck()

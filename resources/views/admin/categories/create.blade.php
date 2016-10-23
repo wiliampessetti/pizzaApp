@@ -1,21 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-	<h3>Nova Categoria</h3>
 
-	@include('errors._check')
+    <div class="container">
+        @if(session('erro'))
+            <div class="alert alert-danger">
+                {{session('erro')}}
+            </div>
+        @endif
+        <h3>Nova Categoria</h3>
 
-	{!! Form::open(['route'=>'admin.categories.store']) !!}
+        @include('errors._check')
 
-	@include('admin.categories._form')
+        {!! Form::open(['route'=>'admin.categories.store', 'files'=>true]) !!}
 
-	<div class="form-group">
-	{!! Form::submit('Salvar', ['class'=>'btn btn-success']) !!}
-	</div>
+        @include('admin.categories._form')
 
-	{!! Form::close() !!}
-</div>
+        <div class="form-group">
+            {!! Form::submit('Salvar', ['class'=>'btn btn-success']) !!}
+        </div>
+
+        {!! Form::close() !!}
+    </div>
 
 
 
