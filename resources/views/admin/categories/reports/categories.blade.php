@@ -1,7 +1,7 @@
 @extends('layouts.report')
 @section('content')
 
-<h3>Relatório de Categorias</h3>
+<h1>Relatório de Categorias</h1>
 
 
 <table class="table table-bordered">

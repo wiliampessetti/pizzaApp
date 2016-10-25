@@ -10,31 +10,11 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <style>
-        body {
-            font-family: 'Lato';
-        }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        table, td, th {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 5px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
         table {
             color: #333;
             font-family: Helvetica, Arial, sans-serif;
-            width: 640px;
+            width: 100%;
             border-collapse:
                     collapse; border-spacing: 0;
         }
@@ -61,6 +41,12 @@
         tr:nth-child(odd) td { background: #FEFEFE; }
 
         tr td:hover { background: #666; color: #FFF; } /* Hover cell effect! */
+
+        h1 {
+            color: #FFFFFF;
+            width:100%;
+            background-image:url("{{ URL::to( '/img/report.png') }}");
+        }
 
     </style>
 </head>

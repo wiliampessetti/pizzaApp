@@ -2,7 +2,7 @@
 @extends('layouts.report')
 @section('content')
 
-    <h3>Relatório de Pedidos</h3>
+    <h1>Relatório de Pedidos</h1>
 
 
     <table class="table table-bordered">

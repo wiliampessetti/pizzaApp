@@ -1,7 +1,7 @@
 @extends('layouts.report')
 @section('content')
+    <h1>Relatório de Produtos</h1>
 
-    <h3>Relatório de Produtos</h3>
 
 
     <table>
