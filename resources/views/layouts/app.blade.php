@@ -56,6 +56,17 @@
                             <li><a href="{{ route('admin.clients.index') }}">Clientes</a></li>
                             <li><a href="{{ route('admin.cupoms.index') }}">Cupons</a></li>
                             <li><a href="{{ route('admin.orders.index') }}">Pedidos</a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        Relatórios <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="{{ route('admin.categories.reports.categories') }}" target="_blank"><i class="fa fa-btn"></i>Categorias</a></li>
+                                        <li><a href="{{ route('admin.products.reports.products') }}" target="_blank"><i class="fa fa-btn"></i>Produtos</a></li>
+                                        <li><a href="{{ route('admin.orders.reports.orders') }}" target="_blank"><i class="fa fa-btn"></i>Pedidos</a></li>
+                                    </ul>
+                                </li>
                         @elseif(Auth::user()->role = "client")
                             <li><a href="{{ route('customer.order.index') }}">Meus Pedidos</a></li>
                         @endif

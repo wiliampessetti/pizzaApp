@@ -21,6 +21,7 @@ Route::get('/home', function () {
 
 Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'admin.'], function (){
     Route::get('categories', ['as'=>'categories.index','uses'=>'CategoriesController@index']);
+    Route::get('categories/reports/categories', ['as'=>'categories.reports.categories','uses'=>'CategoriesController@reportCategory']);
     Route::get('categories/create', ['as'=>'categories.create','uses'=>'CategoriesController@create']);
     Route::get('categories/edit/{id}', ['as'=>'categories.edit','uses'=>'CategoriesController@edit']);
     Route::post('categories/update/{id}', ['as'=>'categories.update','uses'=>'CategoriesController@update']);
@@ -34,6 +35,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'adm
     Route::post('clients/store', ['as'=>'clients.store','uses'=>'ClientsController@store']);
 
     Route::get('products', ['as'=>'products.index','uses'=>'ProductsController@index']);
+    Route::get('products/reports/products', ['as'=>'products.reports.products','uses'=>'ProductsController@reportProduct']);
     Route::get('products/create', ['as'=>'products.create','uses'=>'ProductsController@create']);
     Route::get('products/edit/{id}', ['as'=>'products.edit','uses'=>'ProductsController@edit']);
     Route::post('products/update/{id}', ['as'=>'products.update','uses'=>'ProductsController@update']);
@@ -41,6 +43,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'adm
     Route::get('products/destroy/{id}', ['as'=>'products.destroy','uses'=>'ProductsController@destroy']);
 
     Route::get('orders', ['as'=>'orders.index','uses'=>'OrdersController@index']);
+    Route::get('orders/reports/orders', ['as'=>'orders.reports.orders','uses'=>'OrdersController@reportOrder']);
     Route::get('orders/{id}', ['as'=>'orders.edit','uses'=>'OrdersController@edit']);
     Route::post('orders/update/{id}', ['as'=>'orders.update','uses'=>'OrdersController@update']);
 

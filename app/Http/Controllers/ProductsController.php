@@ -69,4 +69,14 @@ class ProductsController extends Controller
             return back()->with('erro', 'Erro: Existem lançamentos vinculados a esse produto!');
         }
     }
+
+    public function reportProduct()
+    {
+        $products = $this->repository->paginate();
+
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('admin.products.reports.products', compact('products'));
+        return $pdf->stream();
+
+    }
 }

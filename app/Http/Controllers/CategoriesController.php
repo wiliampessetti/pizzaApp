@@ -76,4 +76,14 @@ class CategoriesController extends Controller
             return back()->with('erro', 'Erro: Impossível excluir categorias com produtos vinculados!');
         }
     }
+
+    public function reportCategory()
+    {
+        $categories = $this->repository->paginate();
+
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('admin.categories.reports.categories', compact('categories'));
+        return $pdf->stream();
+
+    }
 }

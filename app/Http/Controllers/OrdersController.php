@@ -47,4 +47,14 @@ class OrdersController extends Controller
         $this->repository->update($all, $id);
         return redirect()->route('admin.orders.index');
     }
+
+    public function reportorder()
+    {
+        $orders = $this->repository->paginate();
+
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('admin.orders.reports.orders', compact('orders'));
+        return $pdf->stream();
+
+    }
 }

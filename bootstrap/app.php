@@ -41,6 +41,7 @@ $app->singleton(
     CodeDelivery\Exceptions\Handler::class
 );
 
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application
