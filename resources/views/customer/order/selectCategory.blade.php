@@ -17,7 +17,7 @@
                             <p>
                                 <h3>{{$category->name}}</h3>
                             </p>
-                            <img src="{{ URL::to( '/img/categories/'.$category->image) }}" />
+                            <img src="{{ URL::to( '/img/categories/'.$category->image) }}" class= "img-circle img-responsive"/>
                         </div>
                     </div>
                 </div>

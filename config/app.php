@@ -151,7 +151,7 @@ return [
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
-         Bestmomo\Scafold\ScafoldServiceProvider::class,
+        Bestmomo\Scafold\ScafoldServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
 
         /*

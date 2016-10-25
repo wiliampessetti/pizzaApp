@@ -7,6 +7,7 @@ use CodeDelivery\Http\Requests\AdminCategoryRequest;
 use CodeDelivery\Repositories\CategoryRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 
 class CategoriesController extends Controller
@@ -69,6 +70,8 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         try{
+            $data = $this->repository->find($id);
+            File::delete(public_path().'/img/categories/'.$data['image']);
             $this->repository->delete($id);
 
             return redirect()->route('admin.categories.index');
