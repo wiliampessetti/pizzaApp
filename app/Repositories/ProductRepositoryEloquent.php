@@ -17,7 +17,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 
     public function pluck()
     {
-        return $this->model->get(['id', 'name', 'price', 'category_id']);
+        return $this->model->get(['id', 'name', 'price', 'category_id', 'image']);
     }
 
     /**

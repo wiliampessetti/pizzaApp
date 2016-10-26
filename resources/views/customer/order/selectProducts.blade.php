@@ -18,6 +18,7 @@
                                 <h3>{{$product->name}}</h3>
                                 <h2>{{$product->price}}</h2>
                                 </p>
+                                <img src="{{ URL::to( '/img/products/'.$product->image) }}" class= "img-circle img-responsive"/>
                             </div>
                         </div>
                     </div>

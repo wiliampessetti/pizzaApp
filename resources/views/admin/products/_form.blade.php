@@ -17,3 +17,8 @@
     {!! Form::label('Price', 'Preço:') !!}
     {!! Form::text('price', null, ['class'=>'form-control']) !!}
 </div>
+
+<div class="form-group">
+    {!! Form::label('Image', 'Imagem:') !!}
+    {!! Form::file('image', null, ['class'=>'form-control']) !!}
+</div>

@@ -1,21 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-	<h3>Novo Produto</h3>
 
-	@include('errors._check')
+    <div class="container">
 
-	{!! Form::open(['route'=>'admin.products.store']) !!}
+        @if(session('erro'))
+            <div class="alert alert-danger">
+                {{session('erro')}}
+            </div>
+        @endif
 
-	@include('admin.products._form')
+        <h3>Novo Produto</h3>
 
-	<div class="form-group">
-	{!! Form::submit('Salvar', ['class'=>'btn btn-success']) !!}
-	</div>
+        @include('errors._check')
 
-	{!! Form::close() !!}
-</div>
+        {!! Form::open(['route'=>'admin.products.store', 'files'=>true]) !!}
+
+        @include('admin.products._form')
+
+        <div class="form-group">
+            {!! Form::submit('Salvar', ['class'=>'btn btn-success']) !!}
+        </div>
+
+        {!! Form::close() !!}
+    </div>
 
 
 

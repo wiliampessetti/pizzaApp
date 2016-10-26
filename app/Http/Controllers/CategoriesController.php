@@ -19,31 +19,34 @@ class CategoriesController extends Controller
         $this->repository = $repository;
     }
 
-    public function index(){
-    	$categories = $this->repository->paginate(10);
+    public function index()
+    {
+        $categories = $this->repository->paginate(10);
 
-    	return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
-    public function create(){
-    	return view('admin.categories.create');
+    public function create()
+    {
+        return view('admin.categories.create');
     }
 
-    public function store(AdminCategoryRequest $requests){
+    public function store(AdminCategoryRequest $requests)
+    {
         $data = $requests->all();
-        if (Input::hasFile('image')){
+        if (Input::hasFile('image')) {
             $image = Input::file('image');
             $extension = $image->getClientOriginalExtension();
-            if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png'){
+            if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png') {
                 return back()->with('erro', 'Erro: O formato da imagem deve ser JPG, JPEG ou PNG!');
-            }else{
+            } else {
 
-                $image->move(public_path().'/img/categories/', 'img_'.$data['name'].'.'.$extension);
-                $data['image'] = 'img_'.$data['name'].'.'.$extension;
+                $image->move(public_path() . '/img/categories/', 'img_' . $data['name'] . '.' . $extension);
+                $data['image'] = 'img_' . $data['name'] . '.' . $extension;
                 $this->repository->create($data);
                 return redirect()->route('admin.categories.index');
             }
-        }else{
+        } else {
             $this->repository->create($data);
             return redirect()->route('admin.categories.index');
         }
@@ -62,20 +65,38 @@ class CategoriesController extends Controller
     public function update(AdminCategoryRequest $requests, $id)
     {
         $data = $requests->all();
-        $this->repository->update($data, $id);
 
-        return redirect()->route('admin.categories.index');
+        if (Input::hasFile('image')) {
+            $image = Input::file('image');
+            $extension = $image->getClientOriginalExtension();
+            if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png') {
+                return back()->with('erro', 'Erro: O formato da imagem deve ser JPG, JPEG ou PNG!');
+            } else {
+                $delImage = $this->repository->find($id);
+                File::delete(public_path() . '/img/categories/' . $delImage['image']);
+                $image->move(public_path() . '/img/categories/', 'img_' . $data['name'] . '.' . $extension);
+                $data['image'] = 'img_' . $data['name'] . '.' . $extension;
+                $this->repository->update($data, $id);
+                return redirect()->route('admin.categories.index');
+            }
+        } else {
+
+            $this->repository->update($data, $id);
+
+            return redirect()->route('admin.categories.index');
+        }
+
     }
 
     public function destroy($id)
     {
-        try{
+        try {
             $data = $this->repository->find($id);
-            File::delete(public_path().'/img/categories/'.$data['image']);
+            File::delete(public_path() . '/img/categories/' . $data['image']);
             $this->repository->delete($id);
 
             return redirect()->route('admin.categories.index');
-        }catch (Exception $e){
+        } catch (Exception $e) {
             return back()->with('erro', 'Erro: Impossível excluir categorias com produtos vinculados!');
         }
     }

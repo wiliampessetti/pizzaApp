@@ -9,6 +9,8 @@ use CodeDelivery\Repositories\CategoryRepository;
 use CodeDelivery\Repositories\ProductRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Input;
 
 class ProductsController extends Controller
 {
@@ -36,9 +38,23 @@ class ProductsController extends Controller
     public function store(AdminProductRequest $requests)
     {
         $data = $requests->all();
-        $this->repository->create($data);
 
-        return redirect()->route('admin.products.index');
+        if (Input::hasFile('image')) {
+            $image = Input::file('image');
+            $extension = $image->getClientOriginalExtension();
+            if ($extension != 'jpg' && $extension != 'jpeg' && $extension != 'png') {
+                return back()->with('erro', 'Erro: O formato da imagem deve ser JPG, JPEG ou PNG!');
+            } else {
+                $image->move(public_path() . '/img/products/', 'img_' . $data['name'] . '.' . $extension);
+                $data['image'] = 'img_' . $data['name'] . '.' . $extension;
+                $this->repository->create($data);
+                return redirect()->route('admin.products.index');
+            }
+        } else {
+            $this->repository->create($data);
+            return redirect()->route('admin.products.index');
+        }
+
     }
 
     public function edit($id)
@@ -61,6 +77,8 @@ class ProductsController extends Controller
     public function destroy($id)
     {
         try {
+            $data = $this->repository->find($id);
+            File::delete(public_path().'/img/products/'.$data['image']);
             $this->repository->delete($id);
 
             return redirect()->route('admin.products.index');
