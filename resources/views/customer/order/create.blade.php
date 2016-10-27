@@ -23,7 +23,7 @@
                         <td><input type="number" id="qtd" name="qtd" value="{{ $row->qty }}" class="form-control"></td>
                         <td>{{$row->price}}</td>
                         <td>{{$row->subtotal}}</td>
-                        <td align="center"><a href="#" class="btn btn-danger">Remover</a></td>
+                        <td align="center"><a href="{{route('customer.order.removeFromCart', $row->rowId)}}" class="btn btn-danger" onclick="return confirm('Remover do pedido?')">Remover</a></td>
                     </tr>
                 @endforeach
                 </tbody>

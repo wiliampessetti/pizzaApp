@@ -79,6 +79,12 @@ class CheckoutController extends Controller
         return view('customer.order.selectCategory', compact('categories'));
     }
 
+    public function removeFromCart($rowId)
+    {
+        Cart::remove($rowId);
+        return view('customer.order.create');
+    }
+
     public function store()
     {
         $i = 0;
