@@ -58,9 +58,12 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'adm
 Route::group(['prefix'=>'customer', 'middleware'=>'auth.checkrole:client', 'as'=>'customer.'], function(){
     Route::get('order', ['as'=>'order.index', 'uses'=>'CheckoutController@index']);
     Route::get('order/create/{id}', ['as'=>'order.create', 'uses'=>'CheckoutController@create']);
+    Route::get('order/create', ['as'=>'order.createIndex', 'uses'=>'CheckoutController@createIndex']);
     Route::get('order/selectCategory', ['as'=>'order.selectCategory','uses'=>'CheckoutController@selectCategory']);
     Route::get('order/selectProduct/{id}', ['as'=>'order.selectProduct','uses'=>'CheckoutController@selectProduct']);
     Route::get('order/removeFromCart/{rowId}', ['as'=>'order.removeFromCart','uses'=>'CheckoutController@removeFromCart']);
+    Route::get('order/downFromCart/{rowId}', ['as'=>'order.downFromCart','uses'=>'CheckoutController@downFromCart']);
+    Route::get('order/upFromCart/{rowId}', ['as'=>'order.upFromCart','uses'=>'CheckoutController@upFromCart']);
     Route::get('order/store', ['as'=>'order.store', 'uses'=>'CheckoutController@store']);
 
 });

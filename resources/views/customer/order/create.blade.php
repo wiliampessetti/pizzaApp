@@ -20,7 +20,8 @@
                 @foreach(Cart::content() as $row)
                     <tr>
                         <td>{{$row->name}}</td>
-                        <td><input type="number" id="qtd" name="qtd" value="{{ $row->qty }}" class="form-control"></td>
+                        <td><a href="{{route('customer.order.downFromCart', $row->rowId)}}" class="btn btn-warning">-</a><input value="{{$row->qty}}" readonly>
+                            <a href="{{route('customer.order.upFromCart', $row->rowId)}}" class="btn btn-warning">+</a></td>
                         <td>{{$row->price}}</td>
                         <td>{{$row->subtotal}}</td>
                         <td align="center"><a href="{{route('customer.order.removeFromCart', $row->rowId)}}" class="btn btn-danger" onclick="return confirm('Remover do pedido?')">Remover</a></td>

@@ -57,13 +57,18 @@ class CheckoutController extends Controller
         return view('customer.order.index', compact('orders'));
     }
 
+    public function createIndex()
+    {
+        return view('customer.order.create');
+    }
+
     public function create($id)
     {
-        $product = $this->productRepository->scopeQuery(function ($query) use($id){
-            return $query->where('id', '=', $id);
-        })->paginate()->toArray();
-        Cart::add($product['data'][0]['id'], $product['data'][0]['name'], 1, $product['data'][0]['price']);
-        return view('customer.order.create');
+            $product = $this->productRepository->scopeQuery(function ($query) use ($id) {
+                return $query->where('id', '=', $id);
+            })->paginate()->toArray();
+            Cart::add($product['data'][0]['id'], $product['data'][0]['name'], 1, $product['data'][0]['price']);
+            return view('customer.order.create');
     }
 
     public function selectProduct($id)
@@ -82,6 +87,20 @@ class CheckoutController extends Controller
     public function removeFromCart($rowId)
     {
         Cart::remove($rowId);
+        return view('customer.order.create');
+    }
+
+    public function downFromCart($rowId)
+    {
+        $product = Cart::get($rowId);
+        Cart::update($rowId, ['qty' => $product->qty-1]);
+        return view('customer.order.create');
+    }
+
+    public function upFromCart($rowId)
+    {
+        $product = Cart::get($rowId);
+        Cart::update($rowId, ['qty' => $product->qty+1]);
         return view('customer.order.create');
     }
 
