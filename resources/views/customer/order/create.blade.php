@@ -32,4 +32,5 @@
             <a href="{{route('customer.order.store')}}" class="btn btn-success" onclick="return confirm('Após finalizado o pedido não pode ser alterado ou editado!')">Finalizar Pedido</a>
         </div>
     </div>
+    
 @endsection
