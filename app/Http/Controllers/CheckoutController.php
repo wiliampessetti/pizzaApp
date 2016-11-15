@@ -121,4 +121,9 @@ class CheckoutController extends Controller
         return redirect()->route('customer.order.index');
     }
 
+    public function erro()
+    {
+        return view('errors.blackListError');
+    }
+
 }

@@ -4,17 +4,20 @@ namespace CodeDelivery\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use CodeDelivery\Repositories\ClientRepository;
-use CodeDelivery\Models\Client;
-use CodeDelivery\Validators\ClientValidator;
+use CodeDelivery\Repositories\BlackListRepository;
+use CodeDelivery\Models\BlackList;
+use CodeDelivery\Validators\BlackListValidator;
 
 /**
- * Class ClientRepositoryEloquent
+ * Class BlackListRepositoryEloquent
  * @package namespace CodeDelivery\Repositories;
  */
-class ClientRepositoryEloquent extends BaseRepository implements ClientRepository
+class BlackListRepositoryEloquent extends BaseRepository implements BlackListRepository
 {
-
+    public function pluck()
+    {
+        return $this->model->get(['id', 'client_id', 'reason']);
+    }
     /**
      * Specify Model class name
      *
@@ -22,7 +25,7 @@ class ClientRepositoryEloquent extends BaseRepository implements ClientRepositor
      */
     public function model()
     {
-        return Client::class;
+        return BlackList::class;
     }
 
     
