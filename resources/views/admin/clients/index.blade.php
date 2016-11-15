@@ -24,6 +24,9 @@
                         <a href="{{route('admin.clients.edit', ['id'=>$client->id])}}" class="btn btn-warning btn-sm">
                             Editar
                         </a>
+                        <a href="{{route('admin.blacklists.create', ['id'=>$client->id])}}" class="btn btn-primary btn-sm">
+                            Adiciona a Lista Negra
+                        </a>
                     </td>
                 </tr>
             @endforeach

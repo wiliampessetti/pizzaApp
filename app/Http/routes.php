@@ -19,6 +19,7 @@ Route::get('/home', function () {
     return view('welcome');
 });
 
+
 Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'admin.'], function (){
     Route::get('categories', ['as'=>'categories.index','uses'=>'CategoriesController@index']);
     Route::get('categories/reports/categories', ['as'=>'categories.reports.categories','uses'=>'CategoriesController@reportCategory']);
@@ -53,15 +54,27 @@ Route::group(['prefix'=>'admin', 'middleware'=>'auth.checkrole:admin','as'=>'adm
     Route::get('cupoms/edit/{id}', ['as'=>'cupoms.edit','uses'=>'CupomsController@edit']);
     Route::get('cupoms/destroy/{id}', ['as'=>'cupoms.destroy','uses'=>'CupomsController@destroy']);
     Route::post('cupoms/update/{id}', ['as'=>'cupoms.update','uses'=>'CupomsController@update']);
+
+    Route::get('blacklists', ['as'=>'blacklists.index','uses'=>'BlacklistController@index']);
+    Route::get('blacklists/reports/blacklists', ['as'=>'blacklists.reports.categories','uses'=>'BlacklistController@reportBlacklist']);
+    Route::get('blacklists/create/{id}', ['as'=>'blacklists.create','uses'=>'BlacklistController@create']);
+    Route::get('blacklists/edit/{id}', ['as'=>'blacklists.edit','uses'=>'BlacklistController@edit']);
+    Route::post('blacklists/update/{id}', ['as'=>'blacklists.update','uses'=>'BlacklistController@update']);
+    Route::post('blacklists/store', ['as'=>'blacklists.store','uses'=>'BlacklistController@store']);
+    Route::get('blacklists/destroy/{id}', ['as'=>'blacklists.destroy','uses'=>'BlacklistController@destroy']);
 });
 
 Route::group(['prefix'=>'customer', 'middleware'=>'auth.checkrole:client', 'as'=>'customer.'], function(){
     Route::get('order', ['as'=>'order.index', 'uses'=>'CheckoutController@index']);
-    Route::get('order/create/{id}', ['as'=>'order.create', 'uses'=>'CheckoutController@create']);
-    Route::get('order/selectCategory', ['as'=>'order.selectCategory','uses'=>'CheckoutController@selectCategory']);
-    Route::get('order/selectProduct/{id}', ['as'=>'order.selectProduct','uses'=>'CheckoutController@selectProduct']);
-    Route::get('order/removeFromCart/{rowId}', ['as'=>'order.removeFromCart','uses'=>'CheckoutController@removeFromCart']);
-    Route::get('order/store', ['as'=>'order.store', 'uses'=>'CheckoutController@store']);
+    Route::get('order/create/{id}', ['middleware'=>'checkblacklist', 'as'=>'order.create', 'uses'=>'CheckoutController@create']);
+    Route::get('order/create', ['middleware'=>'checkblacklist', 'as'=>'order.createIndex', 'uses'=>'CheckoutController@createIndex']);
+    Route::get('order/selectCategory', ['middleware'=>'checkblacklist', 'as'=>'order.selectCategory','uses'=>'CheckoutController@selectCategory']);
+    Route::get('order/selectProduct/{id}', ['middleware'=>'checkblacklist', 'as'=>'order.selectProduct','uses'=>'CheckoutController@selectProduct']);
+    Route::get('order/removeFromCart/{rowId}', ['middleware'=>'checkblacklist', 'as'=>'order.removeFromCart','uses'=>'CheckoutController@removeFromCart']);
+    Route::get('order/downFromCart/{rowId}', ['middleware'=>'checkblacklist', 'as'=>'order.downFromCart','uses'=>'CheckoutController@downFromCart']);
+    Route::get('order/upFromCart/{rowId}', ['middleware'=>'checkblacklist', 'as'=>'order.upFromCart','uses'=>'CheckoutController@upFromCart']);
+    Route::get('order/store', ['middleware'=>'checkblacklist', 'as'=>'order.store', 'uses'=>'CheckoutController@store']);
+    Route::get('order/erro', ['as'=>'order.erro', 'uses'=>'CheckoutController@erro']);
 
 });
 
