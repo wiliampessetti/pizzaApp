@@ -27,6 +27,7 @@
     </style>
 </head>
 <body id="app-layout">
+@if($_SERVER['REQUEST_URI']!='/login' && $_SERVER['REQUEST_URI']!='/')
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -67,7 +68,7 @@
                                         <li><a href="{{ route('admin.orders.reports.orders') }}" target="_blank"><i class="fa fa-btn"></i>Pedidos</a></li>
                                     </ul>
                                 </li>
-                        @elseif(Auth::user()->role = "client")
+                        @elseif(Auth::user()->role = "client")  
                             <li><a href="{{ route('customer.order.index') }}">Meus Pedidos</a></li>
                         @endif
                     @endif
@@ -94,7 +95,7 @@
             </div>
         </div>
     </nav>
-
+    @endif
     @yield('content')
 
     <!-- JavaScripts -->

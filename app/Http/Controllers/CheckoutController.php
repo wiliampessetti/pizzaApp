@@ -11,6 +11,7 @@ use CodeDelivery\Services\OrderService;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class CheckoutController extends Controller
 {
@@ -37,8 +38,8 @@ class CheckoutController extends Controller
         UserRepository $userRepository,
         ProductRepository $productRepository,
         CategoryRepository $categoryRepository,
-    OrderService $service
-    )
+        OrderService $service
+        )
     {
         $this->repository = $repository;
         $this->userRepository = $userRepository;
@@ -49,12 +50,15 @@ class CheckoutController extends Controller
 
     public function index()
     {
-
-        $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
-        $orders = $this->repository->scopeQuery(function ($query) use($clientId){
-            return $query->where('client_id', '=', $clientId);
-        })->paginate();
-        return view('customer.order.index', compact('orders'));
+        try{
+            $clientId = $this->userRepository->find(Auth::user()->id)->client->id;
+            $orders = $this->repository->scopeQuery(function ($query) use($clientId){
+                return $query->where('client_id', '=', $clientId);
+            })->paginate();
+            return view('customer.order.index', compact('orders'));
+        } catch (Exception $e){
+            return view('admin.clients.completeRegister');
+        }
     }
 
     public function createIndex()
@@ -64,11 +68,11 @@ class CheckoutController extends Controller
 
     public function create($id)
     {
-            $product = $this->productRepository->scopeQuery(function ($query) use ($id) {
-                return $query->where('id', '=', $id);
-            })->paginate()->toArray();
-            Cart::add($product['data'][0]['id'], $product['data'][0]['name'], 1, $product['data'][0]['price']);
-            return view('customer.order.create');
+        $product = $this->productRepository->scopeQuery(function ($query) use ($id) {
+            return $query->where('id', '=', $id);
+        })->paginate()->toArray();
+        Cart::add($product['data'][0]['id'], $product['data'][0]['name'], 1, $product['data'][0]['price']);
+        return view('customer.order.create');
     }
 
     public function selectProduct($id)

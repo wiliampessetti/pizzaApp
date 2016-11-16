@@ -17,9 +17,9 @@ class Client extends Model implements Transformable
         'street',
         'number',
         'complement',
-    	'city',
-    	'state',
-    	'zipcode'
+    	'city',    	
+    	'zipcode',
+        'state'
     ];
 
     public function user()

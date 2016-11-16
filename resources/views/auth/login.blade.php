@@ -157,7 +157,8 @@
         @endif
         <input type="submit" value="Sign In">
         <hr>
-        <div class="crtacc"><a href="#">Criar Conta</a></div>
+        <div class="crtacc"><a href="/register">Criar Conta</a></div>
+        <div class="crtacc"><a href="/">Voltar</a></div>
       </form>
     </div>
   @endsection

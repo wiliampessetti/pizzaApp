@@ -25,14 +25,14 @@ class AdminClientRequest extends Request
     {
         return [
             'user.name' => 'required|max:255',
-            'user.email' => 'required|email|max:255|unique:users,email',
+            //'user.email' => 'required|email|max:255|unique:users,email',
             'phone' => 'required|max:255',
             'neighborhood' => 'required|min:3',
             'street' => 'required|min:3',
             'number' => 'required',
             'city' => 'required|max:255|',
-            'state' => 'required|max:2|',
             'zipcode' => 'required|max:9|',
+            'state' => 'required|max:2|',
             'user.password' => 'required|min:6|confirmed',
             'user.password_confirmation' => 'required|min:6',
         ];

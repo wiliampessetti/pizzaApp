@@ -53,4 +53,9 @@ class ClientsController extends Controller
         $this->clientService->update($data, $id);
         return redirect()->route('admin.clients.index');
     }
+
+    public function completeRegister(){
+        return view('admin.clients.completeRegister');
+    }
+
 }

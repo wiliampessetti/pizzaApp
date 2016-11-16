@@ -75,6 +75,7 @@ Route::group(['prefix'=>'customer', 'middleware'=>'auth.checkrole:client', 'as'=
     Route::get('order/upFromCart/{rowId}', ['middleware'=>'checkblacklist', 'as'=>'order.upFromCart','uses'=>'CheckoutController@upFromCart']);
     Route::get('order/store', ['middleware'=>'checkblacklist', 'as'=>'order.store', 'uses'=>'CheckoutController@store']);
     Route::get('order/erro', ['as'=>'order.erro', 'uses'=>'CheckoutController@erro']);
+    Route::post('clients/store', ['as'=>'clients.store','uses'=>'ClientsController@store']);
 
 });
 
@@ -87,3 +88,4 @@ Route::group(['prefix'=>'register','as'=>'register.'], function (){
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
+
